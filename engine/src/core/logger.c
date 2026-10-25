@@ -27,6 +27,6 @@ void log_message(enum LogLevel log_level, const char *message, ...)
     vsnprintf(formatted_message + level_name_length, 16000 - level_name_length, message, argument_ptr);
     va_end(argument_ptr);
 
-    platform_print_message(formatted_message, (i32)log_level); // NOTE:Explicit cast necessary for C++ compatibility
+    platform_console_print(formatted_message, (i32)log_level); // NOTE:Explicit cast necessary for C++ compatibility
     return;
 }

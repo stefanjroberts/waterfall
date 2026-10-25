@@ -8,7 +8,7 @@ echo "Files: " $filenames
 
 compiler_flags="-g -shared -fdeclspec -fPIC"
 include_directories="-Isrc"
-linker_flags="-lvulkan"
+linker_flags="-lvulkan -lwayland-client"
 defines="-DCOMPILE_DEBUG -DWF_EXPORT"
 
 echo "Building Engine..."
