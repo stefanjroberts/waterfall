@@ -2,29 +2,24 @@
 #if WF_PLATFORM_LINUX
 #include "platform/platform_module.h"
 #include <core/logger.h>
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <wayland-client.h>
+#include <time.h>
+
+#include "display_wayland.c"
+// TODO: Implement Xorg version
 
 struct LinuxPlatformContext
 {
-    struct wl_display *display;
-    struct wl_compositor *compositor;
+    struct DisplayServerContext display_server;
 };
 
 void *platform_init(const char *application_name, i32 x, i32 y, i32 width, i32 height)
 {
     struct LinuxPlatformContext *context = (struct LinuxPlatformContext *)malloc(sizeof(struct LinuxPlatformContext));
 
-    context->display = wl_display_connect(NULL);
-
-    if (!context->display)
-    {
-        WF_FATAL("Unable to create wayland display");
-        return NULL;
-    }
-
-    WF_INFO("Wayland display created.");
+    initialize_display_server(&(context->display_server));
 
     return (void *)context;
 }
@@ -33,20 +28,42 @@ void platform_shutdown(void *platform_context)
 {
     struct LinuxPlatformContext *context = (struct LinuxPlatformContext *)platform_context;
 
-    wl_display_disconnect(context->display);
+    shutdown_display_server(&(context->display_server));
 
     free(platform_context);
 
     return;
 }
 
-b32 platform_process_messages(void *context);
+b32 platform_process_messages(void *context)
+{
+    // TODO: Implement event processing for wayland
+    return TRUE;
+}
 
-void *platform_alloc(u64 size, b32 aligned);
-void platform_free(void *memoryptr, b32 aligned);
-void platform_clear_memory(void *memoryptr, u64 size);
-void platform_copy_memory(void *dest, void *source, u64 size);
-void platform_set_memory(void *memoryptr, i32 value, u64 size);
+void *platform_alloc(u64 size, b32 aligned)
+{
+    return malloc(size);
+}
+void platform_free(void *memoryptr, b32 aligned)
+{
+    free(memoryptr);
+    return;
+}
+void platform_clear_memory(void *memoryptr, u64 size)
+{
+    memset(memoryptr, 0, size);
+    return;
+}
+void platform_copy_memory(void *dest, void *src, u64 size)
+{
+    memcpy(dest, src, size);
+    return;
+}
+void platform_set_memory(void *memoryptr, i32 value, u64 size)
+{
+    memset(memoryptr, value, size);
+}
 
 void platform_console_print(char *message, i32 colour)
 {
