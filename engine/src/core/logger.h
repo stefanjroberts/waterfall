@@ -1,6 +1,6 @@
 #pragma once
 
-#include <defines.h>
+#include "defines.h"
 
 #define WF_ASSERTIONS_ENABLED
 
@@ -22,43 +22,43 @@ enum LogLevel
     TRACE
 };
 
-b32 initialize_logger();
-void shutdown_logger();
+b32 logger_init();
+void logger_shutdown();
 
-WFAPI void log_message(enum LogLevel log_level, const char *message, ...);
+WFAPI void message_log(enum LogLevel log_level, const char *message, ...);
 
 #if WF_LOG_LEVEL >= 0
-#define WF_FATAL(message, ...) log_message(FATAL, message, ##__VA_ARGS__);
+#define WF_FATAL(message, ...) message_log(FATAL, message, ##__VA_ARGS__);
 #else
 #define WF_FATAL(message, ...)
 #endif
 
 #if WF_LOG_LEVEL >= 1
-#define WF_ERROR(message, ...) log_message(ERROR, message, ##__VA_ARGS__);
+#define WF_ERROR(message, ...) message_log(ERROR, message, ##__VA_ARGS__);
 #else
 #define WF_ERROR(message, ...)
 #endif
 
 #if WF_LOG_LEVEL >= 2
-#define WF_WARN(message, ...) log_message(WARN, message, ##__VA_ARGS__);
+#define WF_WARN(message, ...) message_log(WARN, message, ##__VA_ARGS__);
 #else
 #define WF_WARN(message, ...)
 #endif
 
 #if WF_LOG_LEVEL >= 3
-#define WF_INFO(message, ...) log_message(INFO, message, ##__VA_ARGS__);
+#define WF_INFO(message, ...) message_log(INFO, message, ##__VA_ARGS__);
 #else
 #define WF_INFO(message, ...)
 #endif
 
 #if WF_LOG_LEVEL >= 4
-#define WF_DEBUG(message, ...) log_message(DEBUG, message, ##__VA_ARGS__);
+#define WF_DEBUG(message, ...) message_log(DEBUG, message, ##__VA_ARGS__);
 #else
 #define WF_DEBUG(message, ...)
 #endif
 
 #if WF_LOG_LEVEL >= 5
-#define WF_TRACE(message, ...) log_message(TRACE, message, ##__VA_ARGS__);
+#define WF_TRACE(message, ...) message_log(TRACE, message, ##__VA_ARGS__);
 #else
 #define WF_TRACE(message, ...)
 #endif

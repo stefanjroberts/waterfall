@@ -1,21 +1,21 @@
 #include "logger.h"
-#include <platform/platform_module.h>
+#include "modules/platform.h"
 #include <stdarg.h> //Necessary to use variadic arguments
 #include <stdio.h>  // Necessary for printing //libraries
 
-b32 initalize_logging()
+b32 logger_init()
 {
     // TODO: Create a log output file to write to.
     return TRUE;
 }
 
-void shutdown_logging()
+void logger_shutdown()
 {
     // TODO: Flush buffer and write to output file.
     return;
 }
 
-void log_message(enum LogLevel log_level, const char *message, ...)
+void message_log(enum LogLevel log_level, const char *message, ...)
 {
     const i32 level_name_length = 9;
     const char *level_names[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]:  ", "[INFO]:  ", "[DEBUG]: ", "[TRACE]: "};

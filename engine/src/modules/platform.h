@@ -1,8 +1,8 @@
 #pragma once
-#include <defines.h>
+#include "defines.h"
 
-WFAPI void *platform_init(const char *application_name, i32 x, i32 y, i32 width, i32 height);
-WFAPI void platform_shutdown(void *context);
+void *platform_init(const char *application_name, i32 x, i32 y, i32 width, i32 height);
+void platform_shutdown(void *context);
 
 b32 platform_process_messages(void *context);
 
@@ -14,5 +14,5 @@ void platform_set_memory(void *memoryptr, i32 value, u64 size);
 
 void platform_console_print(char *message, i32 colour);
 
-f64 platform_get_time();
-void platform_sleep(u64 ms);
+u64 platform_get_time();
+void platform_sleep(u64 microseconds);

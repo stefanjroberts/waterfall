@@ -2,7 +2,7 @@
 
 mkdir ../bin
 
-filenames=$(find . -type f -name "*module.c")
+filenames=$(find ./src/modules/ -type f -name "*.c")
 
 echo "Files: " $filenames
 

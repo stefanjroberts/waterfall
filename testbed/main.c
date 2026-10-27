@@ -1,17 +1,19 @@
-#include <core/core_module.h>
-#include <platform/platform_module.h>
+#include "core/logger.h"
+#include "modules/engine_runtime.h"
 
 int main(void)
 {
+    struct EngineInitInfo init_info = {"Test Application", 0, 0, 600, 800};
 
-    void *platform_context = platform_init("Test Window", 0, 0, 600, 800);
-    if (platform_context == 0)
+    if (!engine_init(init_info))
     {
-        WF_FATAL("Failed to initalise platform layer.");
+        WF_FATAL("Engine initalisation failed, shutting down...");
         return 1;
     }
 
-    platform_shutdown(platform_context);
+    engine_run();
+
+    WF_INFO("Shutting down...");
 
     return 0;
 }
