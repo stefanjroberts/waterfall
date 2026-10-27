@@ -52,7 +52,7 @@ void platform_free(void *memoryptr, b32 aligned)
     free(memoryptr);
     return;
 }
-void platform_clear_memory(void *memoryptr, u64 size)
+void platform_zero_memory(void *memoryptr, u64 size)
 {
     memset(memoryptr, 0, size);
     return;

@@ -8,7 +8,7 @@ b32 platform_process_messages(void *context);
 
 void *platform_alloc(u64 size, b32 aligned);
 void platform_free(void *memoryptr, b32 aligned);
-void platform_clear_memory(void *memoryptr, u64 size);
+void platform_zero_memory(void *memoryptr, u64 size);
 void platform_copy_memory(void *dest, void *source, u64 size);
 void platform_set_memory(void *memoryptr, i32 value, u64 size);
 
