@@ -1,4 +1,4 @@
-#include <defines.h>
+#include "defines.h"
 #if WF_PLATFORM_LINUX
 #include "modules/platform.h"
 

@@ -44,3 +44,6 @@ _Static_assert(sizeof(f64) == 8, "f64 wrong size");
 #else
 #define WFAPI
 #endif
+
+// NOTE: Only vulkan renderer currently supported
+#define VULKAN_BACKEND 1
